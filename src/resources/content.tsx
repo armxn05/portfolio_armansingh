@@ -1,5 +1,5 @@
 import { About, Blog, Gallery, Home, Newsletter, Person, Social, Work } from "@/types";
-import { Line, Row, Text } from "@once-ui-system/core";
+import { Line, Logo, Row, Text } from "@once-ui-system/core";
 
 const person: Person = {
   firstName: "Arman",
@@ -8,8 +8,8 @@ const person: Person = {
   role: "Software Developer",
   avatar: "/images/avatar.jpg",
   email: "armansinghbhadoria05@gmail.com",
-  location: "Asia/Kolkata", // IANA time zone identifier
-  languages: ["English"], // optional
+  location: "Asia/Kolkata", // Expecting the IANA time zone identifier, e.g., 'Europe/Vienna'
+  languages: ["English",], // optional: Leave the array empty if you don't want to display languages
 };
 
 const newsletter: Newsletter = {
@@ -19,6 +19,8 @@ const newsletter: Newsletter = {
 };
 
 const social: Social = [
+  // Links are automatically displayed.
+  // Import new icons in /once-ui/icons.ts
   {
     name: "GitHub",
     icon: "github",
@@ -27,12 +29,12 @@ const social: Social = [
   {
     name: "LinkedIn",
     icon: "linkedin",
-    link: "https://www.linkedin.com/in/arman-singh-bhadoria",
+    link: "www.linkedin.com/in/arman-singh-bhadoria",
   },
   {
     name: "Threads",
     icon: "threads",
-    link: "https://www.threads.com/@armxn05",
+    link: "https://www.threads.com/@once_ui",
   },
   {
     name: "Email",
@@ -47,14 +49,30 @@ const home: Home = {
   label: "Home",
   title: `${person.name}'s Portfolio`,
   description: `Portfolio website showcasing my work as a ${person.role}`,
-  headline: <>Building impactful solutions with software and AI</>,
+  headline: <>Building bridges between design and code</>,
   featured: {
-    display: false, // removed Once UI featured work
+    display: true,
+    title: (
+      <Row gap="12" vertical="center">
+        <strong className="ml-4">Once UI</strong>{" "}
+        <Line background="brand-alpha-strong" vert height="20" />
+        <Text marginRight="4" onBackground="brand-medium">
+          Featured work
+        </Text>
+      </Row>
+    ),
+    href: "/work/building-once-ui-a-customizable-design-system",
   },
   subline: (
     <>
-      I'm Arman, a Software Developer, where I craft intuitive
-      <br /> user experiences and build real-world AI/ML projects.
+      I'm Arman, a Software Developer{" "}
+      <Logo
+        dark
+        icon="/trademarks/wordmark-dark.svg"
+        style={{ display: "inline-flex", top: "0.25em", marginLeft: "-0.25em" }}
+      />
+      , where I craft intuitive
+      <br /> user experiences. After hours, I build my own projects.
     </>
   ),
 };
@@ -80,15 +98,12 @@ const about: About = {
     title: "Introduction",
     description: (
       <>
-        Hi, I’m Arman Singh, a passionate Software Developer dedicated to
-        building impactful projects that solve real-world problems. With a keen
-        interest in Machine Learning and Artificial Intelligence, I love
-        transforming ideas into intelligent, scalable solutions.
+        Hi, This is Arman Singh, a passionate Software Developer dedicated to building impactful projects that solve real-world problems. With a keen interest in Machine Learning and Artificial Intelligence, I love transforming ideas into intelligent, scalable solutions.
       </>
     ),
   },
   work: {
-    display: true,
+    display: true, // set to false to hide this section
     title: "Work Experience",
     experiences: [
       {
@@ -96,20 +111,30 @@ const about: About = {
         timeframe: "June 2022 - July 2022 ",
         role: "Software Developer Job Simulation",
         achievements: [
-          <>Worked on various software engineering projects through FORAGE.</>,
           <>
-            Tasks included:  
-            • Using JPMorgan Chase & Co. frameworks and tools  
-            • Displaying data visually for traders  
-            • Working with stock price data feeds  
+            Worked on various software engineering projects by JPMorgan Chase & Co. through FORAGE.
+          </>,
+          <>
+            The projects involved working on following tasks :
+            • Using JPMorgan Chase & Co. frameworks and tools
+            • Displaying data visually for traders
+            • Working on interface with a stock price data feed.
           </>,
         ],
-        images: [],
+        images: [
+          // optional: leave the array empty if you don't want to display images
+          {
+            src: "/images/projects/project-01/cover-01.jpg",
+            alt: "Once UI Project",
+            width: 16,
+            height: 9,
+          },
+        ],
       },
     ],
   },
   studies: {
-    display: true,
+    display: true, // set to false to hide this section
     title: "Studies",
     institutions: [
       {
@@ -123,18 +148,41 @@ const about: About = {
     ],
   },
   technical: {
-    display: true,
+    display: true, // set to false to hide this section
     title: "Technical skills",
     skills: [
       {
         title: "Python",
-        description: <>Writing project scripts with high efficiency.</>,
-        tags: [],
-        images: [],
+        description: (
+          <>Writing project scripts with high efficiency.</>
+        ),
+        tags: [
+          {
+            name: "",
+            icon: "figma",
+          },
+        ],
+        // optional: leave the array empty if you don't want to display images
+        images: [
+          {
+            src: "/images/projects/project-01/cover-02.jpg",
+            alt: "Project image",
+            width: 16,
+            height: 9,
+          },
+          {
+            src: "/images/projects/project-01/cover-03.jpg",
+            alt: "Project image",
+            width: 16,
+            height: 9,
+          },
+        ],
       },
       {
         title: "Next.js",
-        description: <>Building next gen apps with Next.js and modern tools.</>,
+        description: (
+          <>Building next gen apps with Next.js + Once UI + Supabase.</>
+        ),
         tags: [
           {
             name: "JavaScript",
@@ -144,9 +192,21 @@ const about: About = {
             name: "Next.js",
             icon: "nextjs",
           },
+          {
+            name: "Supabase",
+            icon: "supabase",
+          },
         ],
-        images: [],
-      },
+        // optional: leave the array empty if you don't want to display images
+        images: [
+          {
+            src: "/images/projects/project-01/cover-04.jpg",
+            alt: "Project image",
+            width: 16,
+            height: 9,
+          },
+        ],
+      },  
     ],
   },
 };
@@ -154,15 +214,19 @@ const about: About = {
 const blog: Blog = {
   path: "/blog",
   label: "Blog",
-  title: "Writing about tech and AI...",
-  description: `Read what ${person.name} has been exploring recently`,
+  title: "Writing about design and tech...",
+  description: `Read what ${person.name} has been up to recently`,
+  // Create new blog posts by adding a new .mdx file to app/blog/posts
+  // All posts will be listed on the /blog route
 };
 
 const work: Work = {
   path: "/work",
   label: "Work",
   title: `Projects – ${person.name}`,
-  description: `Software and AI/ML projects by ${person.name}`,
+  description: `Design and dev projects by ${person.name}`,
+  // Create new project pages by adding a new .mdx file to app/blog/posts
+  // All projects will be listed on the /home and /work routes
 };
 
 const gallery: Gallery = {
